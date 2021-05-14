@@ -9,7 +9,6 @@ exports.toModel = function (entity) {
     return model
 }
 
-
 exports.toSearchModel = function (entities) {
     let models = []
     for (const entity of entities) {

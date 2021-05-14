@@ -19,87 +19,66 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let studentApi = require('./api/students')
-let classApi = require('./api/classes')
-let teacherApi = require('./api/teachers');
-let userApi = require('./api/user');
+// let studentApi = require('./api/students')
+// let classApi = require('./api/classes')
+// let teacherApi = require('./api/teachers');
+// let userApi = require('./api/user');
 const { Router } = require('express');
+let customerApi = require ('./api/customer')
 
-const Salt = 10;
+//const Salt = 10;
 
 
-app.post('/register', async function (req, res) {
-    try {
-        let response = await userApi.create(req.body)
-        res.json(response)
-    } catch (err) {
-        res.status(400).send({
-            message: err.message
-        });
-    }
-})
+// app.post('/register', async function (req, res) {
+//     try {
+//         let response = await userApi.create(req.body)
+//         res.json(response)
+//     } catch (err) {
+//         res.status(400).send({
+//             message: err.message
+//         });
+//     }
+// })
 
-app.post('/login', async function (req, res) {
+// app.post('/login', async function (req, res) {
+//     try {
+//         let response = await userApi.login(req.body)
+//         res.json(response)
+//     } catch (err) {
+//         res.status(400).send({
+//             message: err.message
+//         });
+//     }
+// })
+app.post('/customers', async function (req, res) {
     try {
-        let response = await userApi.login(req.body)
-        res.json(response)
-    } catch (err) {
-        res.status(400).send({
-            message: err.message
-        });
-    }
-})
-app.post('/students', async function (req, res) {
-    try {
-        let response = await studentApi.create(req.body)
-        res.json(response)
-    } catch (err) {
-        res.json(err.message)
-    }
-})
-
-app.put('/students/:id', async function (req, res) {
-    try {
-        let response = await studentApi.update(req.params.id, req.body)
-        res.json(response)
-    } catch (err) {
-        res.json(err.message)
-    }
-})
-app.get('/students/:id', async function (req, res) {
-    try {
-        let response = await studentApi.get(req.params.id)
+        let response = await customerApi.create(req.body)
         res.json(response)
     } catch (err) {
         res.json(err.message)
     }
 })
 
-app.get('/students', async function (req, res) {
+app.put('/customers/:id', async function (req, res) {
     try {
-        let response = await studentApi.search(req.query)
+        let response = await customerApi.update(req.params.id, req.body)
         res.json(response)
     } catch (err) {
         res.json(err.message)
     }
-
 })
-
-app.delete('/students/:id', async function (req, res) {
+app.get('/customers/:id', async function (req, res) {
     try {
-        let response = await studentApi.delete(req.params.id)
+        let response = await customerApi.get(req.params.id)
         res.json(response)
     } catch (err) {
         res.json(err.message)
     }
-
-
-
 })
 
-app.post('/classes', async function (req, res) {
+app.get('/customers', async function (req, res) {
     try {
-        let response = await classApi.create(req.body)
+        let response = await customerApi.search(req.query)
         res.json(response)
     } catch (err) {
         res.json(err.message)
@@ -107,94 +86,14 @@ app.post('/classes', async function (req, res) {
 
 })
 
-app.put('/classes/:id', async function (req, res) {
+app.delete('/customers/:id', async function (req, res) {
     try {
-        let response = await classApi.update(req.params.id, req.body)
+        let response = await customerApi.delete(req.params.id)
         res.json(response)
     } catch (err) {
         res.json(err.message)
     }
 })
-
-app.get('/classes/:id', async function (req, res) {
-    try {
-        let response = await classApi.get(req.params.id)
-        res.json(response)
-    } catch (err) {
-        res.json(err.message)
-    }
-})
-
-app.get('/classes', async function (req, res) {
-    try {
-        let response = await classApi.search(req.query)
-        res.json(response)
-    } catch (err) {
-        res.json(err.message)
-    }
-})
-
-app.delete('/classes/:id', async function (req, res) {
-    try {
-        let response = await classApi.delete(req.params.id)
-        res.json(response)
-    } catch (err) {
-        res.json(err.message)
-    }
-})
-
-
-app.post('/teachers', async function (req, res) {
-    try {
-        let response = await teacherApi.create(req.body)
-        res.json(response)
-    }
-    catch (err) {
-        res.json(err.message)
-    }
-
-})
-
-
-
-
-app.put('/teachers/:id', async function (req, res) {
-    try {
-        let response = await teacherApi.update(req.params.id, req.body)
-        res.json(response)
-    } catch (err) {
-        res.json(err.message)
-    }
-})
-
-app.get('/teachers/:id', async function (req, res) {
-    try {
-        let response = await teacherApi.get(req.params.id)
-        res.json(response)
-    }
-    catch (err) {
-        res.json(err.message)
-    }
-})
-
-app.get('/teachers', async function (req, res) {
-    try {
-        let response = await teacherApi.search(req.query)
-        res.json(response)
-    } catch (err) {
-        res.json(err.message)
-    }
-})
-
-app.delete('/teachers/:id', async function (req, res) {
-    try {
-        let response = await teacherApi.delete(req.params.id)
-        res.json(response)
-    } catch (err) {
-        res.json(err.message)
-    }
-})
-
 
 app.listen(9090, function () {
     console.log('server started on port 9090...')

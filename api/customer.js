@@ -1,6 +1,6 @@
-let mapper = require('../mappers/class')
-let Class = require('../models/class')
-let service = require('../service/class')
+let mapper = require('../mappers/customer')
+let Customer = require('../models/customer')
+let service = require('../service/customer')
 
 exports.create = async (body) => {
     let entity = await service.create(body)
@@ -18,12 +18,12 @@ exports.get = async (id) => {
 }
 
 exports.search = async (query) => {
-    let entities = await Class.find(query)
+    let entities = await Customer.find(query)
     return mapper.toSearchModel(entities)
 }
 
 exports.delete = async (id) => {
-    let entity = await Class.findByIdAndDelete(id)
+    let entity = await Customer.findByIdAndDelete(id)
     if (entity) {
         return 'Deleted Successfully'
     } else {

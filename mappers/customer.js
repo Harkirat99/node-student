@@ -1,14 +1,18 @@
-const classMapper = require('./class')
+const customerMapper = require('./customer')
 
 exports.toModel = function (entity) {
     let model = {
         id: entity.id,
-        name: entity.name,
-        class: classMapper.toModel(entity.class) 
+        firstname: entity.firstname,
+        lastname: entity.lastname,
+        email: entity.email,
+        country: entity.country,
+        state: entity.state,
+        city: entity.city,
+        phonenumber:entity.phonenumber
     }
     return model
 }
-
 
 exports.toSearchModel = function (entities) {
     let models = []
@@ -16,5 +20,5 @@ exports.toSearchModel = function (entities) {
         models.push(this.toModel(entity))
     }
     return models
-    
+
 }
